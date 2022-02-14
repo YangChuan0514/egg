@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../public/css//default.css">
+    <title>Document</title>
+</head>
+<body>
+    11111111
+    <% include header.html %>
+    <%= newTime%>
+    <h1> I am YC <%= username%> <%= counter%></h1>
+    <button onclick=add()>增加cookies</button>
+    <button onclick=del()>删除cookies</button>
+    <button onclick=edit()>修改cookies</button>
+    <button onclick=show()>查看cookies</button>
+    <h3>shajdhsjkdsah我的ID是<%= id%>  名字是 <%= name%> <%= age%>岁</h3>
+    <p>技能 
+        <ul>
+            <% for(let i = 0; i < skills.length; i++) { %>
+                <li><%= skills[i] %></li>
+            <% } %>
+        </ul>
+    </p>
+    <script>
+        function add(){
+            fetch('/add', {
+                method:'post',
+                headers:{
+                    'Content-type': 'application/json'
+                }
+            })
+        }
+        function del(){
+            fetch('/del', {
+                method:'post',
+                headers:{
+                    'Content-type': 'application/json'
+                }
+            })
+        }
+        function edit(){
+            fetch('/edit', {
+                method:'post',
+                headers:{
+                    'Content-type': 'application/json'
+                }
+            })
+        }
+        function show(){
+            fetch('/show', {
+                method:'post',
+                headers:{
+                    'Content-type': 'application/json'
+                }
+            })
+        }
+    </script>
+</body>
+</html>
