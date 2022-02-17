@@ -35,7 +35,7 @@ class userController extends Controller {
     } else {
       ctx.body = {
         code: -1,
-        data: '注册失败',
+        data: '注册失败,请重试',
       };
     }
   }
@@ -43,10 +43,12 @@ class userController extends Controller {
   async getUser() {
     const ctx = this.ctx;
     const data = ctx.request.body;
-    if (data.accountNumber.length < 6 || data.accountNumber.length > 18 || data.password.length < 6 || data.password.length > 18) {
+    console.log(data);
+    if (data.accountNumber.length < 6 || data.accountNumber.length > 18
+      || data.password.length < 6 || data.password.length > 18) {
       ctx.body = {
         code: -1,
-        data: '账号或者密码输入错误',
+        data: '账号或者密码输入不正确，请重试',
       };
       return;
     }
@@ -63,12 +65,12 @@ class userController extends Controller {
       }
       ctx.body = {
         code: 1,
-        data: '账号或者密码不对',
+        data: '账号或者密码输入不正确，请重试',
       };
     } else {
       ctx.body = {
         code: -1,
-        data: '登录失败',
+        data: '登录失败，请重试',
       };
     }
   }
@@ -102,7 +104,7 @@ class userController extends Controller {
       if (!data.id) {
         ctx.body = {
           code: 1,
-          data: '账号或者密码输入不正确',
+          data: '账号或者密码输入不正确,请重试',
         };
         return;
       }
@@ -120,7 +122,7 @@ class userController extends Controller {
     } else {
       ctx.body = {
         code: 1,
-        data: '修改失败',
+        data: '修改失败，请重试',
       };
     }
   }
