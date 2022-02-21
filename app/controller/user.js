@@ -43,7 +43,6 @@ class userController extends Controller {
   async getUser() {
     const ctx = this.ctx;
     const data = ctx.request.body;
-    console.log(data);
     if (data.accountNumber.length < 6 || data.accountNumber.length > 18
       || data.password.length < 6 || data.password.length > 18) {
       ctx.body = {
@@ -53,12 +52,24 @@ class userController extends Controller {
       return;
     }
     const res = await ctx.service.user.getUserData(data);
+    console.log(res);
     if (res) {
+      if (!Array.isArray(res)) {
+        if (res.accountNumber === data.accountNumber && res.password === data.password) {
+          ctx.body = {
+            code: 0,
+            data: '登录成功',
+            id: res.id,
+          };
+          return;
+        }
+      }
       for (let i = 0; i < res.length; i++) {
         if (res[i].accountNumber === data.accountNumber && res[i].password === data.password) {
           ctx.body = {
             code: 0,
             data: '登录成功',
+            id: res.id,
           };
           return;
         }

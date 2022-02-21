@@ -29,4 +29,9 @@ module.exports = app => {
   router.post('/register', controller.user.addUser);
   router.post('/login', controller.user.getUser);
   router.post('/changePassword', controller.user.updateUser);
+  // 发贴√
+  router.post('/addForum', controller.forum.index.addForum);
+  router.get('/getForum', controller.forum.index.getForum);
+  router.post('/updateForum', controller.forum.index.updateForum);
+  router.post('/deleteForum', controller.forum.index.deleteForum);
 };

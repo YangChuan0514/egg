@@ -20,10 +20,10 @@ class userService extends Service {
     }
 
   }
-  async getUserData() {
+  async getUserData(obj) {
     try {
       const app = this.app;
-      const res = await app.mysql.select('user');
+      const res = await app.mysql.get('user', obj);
       return res;
     } catch (error) {
       return null;
