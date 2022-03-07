@@ -28,6 +28,13 @@ class userController extends Controller {
     }
     const res = await ctx.service.user.addUserData(data);
     if (res) {
+      console.log(res);
+      await ctx.service.userMessage.addUserMessageData({
+        userId: res.insertId,
+        headImg: 'https://img.yzcdn.cn/vant/cat.jpeg',
+        nickName: '新用户',
+        background: 'https://img.yzcdn.cn/vant/cat.jpeg',
+      });
       ctx.body = {
         code: 0,
         data: '注册成功',
