@@ -1,6 +1,6 @@
-"use strict";
+'use strict';
 
-const Controller = require("egg").Controller;
+const Controller = require('egg').Controller;
 
 class commentController extends Controller {
   async addComment() {
@@ -34,6 +34,17 @@ class commentController extends Controller {
     const data = ctx.request.body;
     const getData = await ctx.service.forum.comment.getCommentForum(data);
     ctx.body = getData;
+  }
+  // 获取用户论坛的所有评价
+  async getUserForumComment() {
+    const ctx = this.ctx;
+    const data = ctx.request.body;
+    const getData = await ctx.service.forum.index.getUserForumData(data);
+    const idList = getData.map(item => item.id);
+    const commentDate = await ctx.service.forum.comment.getCommentData({
+      commentForumId: idList,
+    });
+    ctx.body = commentDate;
   }
 }
 module.exports = commentController;

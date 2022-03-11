@@ -28,7 +28,6 @@ class userController extends Controller {
     }
     const res = await ctx.service.user.addUserData(data);
     if (res) {
-      console.log(res);
       await ctx.service.userMessage.addUserMessageData({
         userId: res.insertId,
         headImg: 'https://img.yzcdn.cn/vant/cat.jpeg',
@@ -59,7 +58,6 @@ class userController extends Controller {
       return;
     }
     const res = await ctx.service.user.getUserData(data);
-    console.log(res);
     if (res) {
       if (!Array.isArray(res)) {
         if (res.accountNumber === data.accountNumber && res.password === data.password) {

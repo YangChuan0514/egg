@@ -15,7 +15,6 @@ class upLoadController extends Controller {
     };
     const putPolicy = new qiniu.rs.PutPolicy(options);
     const uploadToken = putPolicy.uploadToken(mac);
-    console.log(uploadToken);
     ctx.body = uploadToken;
   }
 }

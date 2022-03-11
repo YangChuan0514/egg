@@ -67,8 +67,6 @@ class HomeController extends Controller {
     const cookies = ctx.cookies.get('user', {
       encrypt: true,
     });
-    const username = ctx.session.username;
-    console.log(username);
     ctx.body = {
       status: 200,
       data: cookies,
@@ -76,13 +74,10 @@ class HomeController extends Controller {
   }
   async newContext() {
     const { ctx } = this;
-    const params = ctx.params('username');
-    console.log(params);
     ctx.body = 'wqewqewq';
   }
   async newRequest() {
     const { ctx } = this;
-    console.log(ctx.request.token);
     ctx.body = ctx.request.token;
   }
   async newResponse() {

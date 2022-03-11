@@ -60,6 +60,8 @@ module.exports = app => {
   router.post('/getComment', controller.forum.comment.getComment);
   router.post('/getCommentForum', controller.forum.comment.getCommentForum);
 
+  // 评论我的 getUserForumComment
+  router.post('/getUserForumComment', controller.forum.comment.getUserForumComment);
   // 收藏
   router.post('/addCollect', controller.forum.collect.addCollect);
   router.post('/deleteCollect', controller.forum.collect.deleteCollect);
@@ -77,4 +79,5 @@ module.exports = app => {
   router.post('/getUserAttentionMessage', controller.userAttention.userAttentionMessage);
   // 关注我的
   router.post('/getUserAttentionTMessage', controller.userAttention.userAttentionTMessage);
+  router.post('/updateUserAttWarn', controller.userAttention.updateUserAttWarn);
 };

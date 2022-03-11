@@ -2,7 +2,6 @@
 module.exports = {
   params(key) {
     const method = this.request.method;
-    console.log(method);
     if (method === 'GET') {
       return key ? this.query[key] : this.query;
     }

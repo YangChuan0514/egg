@@ -34,7 +34,6 @@ class collectController extends Controller {
     const data = ctx.request.body;
     const getData = await ctx.service.forum.index.getForumData(data);
     const IdList = getData.map((item) => item.id);
-    console.log(IdList);
     const res = await ctx.service.forum.collect.getCollectData({
       commentForumId: IdList,
     });

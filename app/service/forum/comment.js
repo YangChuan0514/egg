@@ -5,7 +5,6 @@ class CommentService extends Service {
   async addCommentData(obj) {
     try {
       const { ctx } = this;
-      console.log(obj);
       obj.commentImg = obj.commentImg.join(',');
       const res = await ctx.model.Comment.create(obj);
       return res;
@@ -26,7 +25,13 @@ class CommentService extends Service {
   // 获取某个用户的所有评价
   async getCommentData(obj) {
     const { ctx } = this;
-    const res = await ctx.model.Comment.findAndCountAll({ where: obj });
+    const res = await ctx.model.Comment.findAndCountAll({
+      include: [
+        {
+          model: this.app.model.UserMessage,
+        },
+      ],
+      where: obj });
     return res;
   }
   // 获取某个用户的所有评价的论坛

@@ -1,6 +1,6 @@
-'use strict';
+"use strict";
 
-const Controller = require('egg').Controller;
+const Controller = require("egg").Controller;
 
 class userAttentionController extends Controller {
   async addUserAttention() {
@@ -12,7 +12,9 @@ class userAttentionController extends Controller {
   async deleteUserAttention() {
     const ctx = this.ctx;
     const data = ctx.request.body;
-    const getData = await ctx.service.userAttention.deleteUserAttentionData(data);
+    const getData = await ctx.service.userAttention.deleteUserAttentionData(
+      data
+    );
     ctx.body = getData;
   }
   async userAttentionNum() {
@@ -25,14 +27,26 @@ class userAttentionController extends Controller {
   async userAttentionMessage() {
     const ctx = this.ctx;
     const data = ctx.request.body;
-    const getData = await ctx.service.userAttention.getUserAttentionMessage(data);
+    const getData = await ctx.service.userAttention.getUserAttentionMessage(
+      data
+    );
     ctx.body = getData;
   }
   // 关注我的
   async userAttentionTMessage() {
     const ctx = this.ctx;
     const data = ctx.request.body;
-    const getData = await ctx.service.userAttention.getUserAttentionTMessage(data);
+    const getData = await ctx.service.userAttention.getUserAttentionTMessage(
+      data
+    );
+    ctx.body = getData;
+  }
+  async updateUserAttWarn() {
+    const ctx = this.ctx;
+    const data = ctx.request.body;
+    const getData = await ctx.service.userAttention.updateUserAttWarn(
+      data
+    );
     ctx.body = getData;
   }
 }

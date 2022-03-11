@@ -6,6 +6,8 @@ module.exports = app => {
     Id: { type: INTEGER, primaryKey: true, autoIncrement: true },
     userId: INTEGER(11),
     userattId: STRING(18),
+    warn: INTEGER(11),
+    newTime: INTEGER(11),
   });
   UserAttentionT.associate = function() {
     app.model.UserAttentionT.hasOne(app.model.UserMessage, { sourceKey: 'userId', foreignKey: 'userId' });

@@ -10,6 +10,7 @@ module.exports = app => {
     commentContent: STRING(255),
     commentImg: STRING(255),
     newTime: INTEGER(20),
+    warn: INTEGER(11),
   });
   Comment.associate = function() {
     app.model.Comment.hasOne(app.model.UserMessage, { sourceKey: 'userId', foreignKey: 'userId' });

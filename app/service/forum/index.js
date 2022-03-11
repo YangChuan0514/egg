@@ -96,7 +96,6 @@ class forumService extends Service {
   // 查找某个用户的论坛
   async getUserForumData(obj) {
     const { ctx } = this;
-    console.log(obj);
     const res = await ctx.model.Forum.findAll({
       include: [
         { model: this.app.model.Collect },
@@ -119,7 +118,6 @@ class forumService extends Service {
   }
   async getUserForumDataId(id) {
     const { ctx } = this;
-    console.log(id);
     const res = await ctx.model.Forum.findAll({
       include: [
         { model: this.app.model.Collect },

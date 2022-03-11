@@ -1,5 +1,5 @@
-'use strict';
-const Service = require('egg').Service;
+"use strict";
+const Service = require("egg").Service;
 // 点赞
 class dianzanService extends Service {
   async addDianzanData(obj) {
@@ -21,6 +21,11 @@ class dianzanService extends Service {
   async getDianzanNum(obj) {
     const { ctx } = this;
     const res = await ctx.model.Dianzan.findAll({
+      include: [
+        {
+          model: this.app.model.UserMessage,
+        },
+      ],
       where: obj,
     });
     return res;
@@ -45,11 +50,10 @@ class dianzanService extends Service {
       where: obj,
     });
     const resArr = [];
-    res.forEach(item => {
+    res.forEach((item) => {
       if (item.forum) {
         resArr.push(item.forum);
       }
-
     });
     return resArr;
   }
