@@ -46,5 +46,30 @@ class commentController extends Controller {
     });
     ctx.body = commentDate;
   }
+  async updateUserForumComment() {
+    const ctx = this.ctx;
+    const data = ctx.request.body;
+    const getData = await ctx.service.forum.index.getUserForumData(data);
+    const idList = getData.map(item => item.id);
+    const commentDate = await ctx.service.forum.comment.getCommentData({
+      commentForumId: idList,
+    });
+    console.log(commentDate);
+    const promiseAll = [];
+    commentDate.rows.forEach(item => {
+      item.dataValues.warn = 1;
+      promiseAll.push(
+        new Promise(async res => {
+          res(
+            await ctx.service.forum.comment.updateCommentData(item.dataValues, {
+              commentId: item.dataValues.commentId,
+            })
+          );
+        })
+      );
+    });
+    await Promise.all(promiseAll);
+    ctx.body = commentDate;
+  }
 }
 module.exports = commentController;

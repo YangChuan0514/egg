@@ -42,6 +42,8 @@ module.exports = app => {
   router.post('/updateForum', controller.forum.index.updateForum);
   router.post('/deleteForum', controller.forum.index.deleteForum);
   router.get('/upLoad', controller.upload.index.upload);
+  // 模糊搜索
+  router.post('/getForumDataDim', controller.forum.index.getForumDim);
 
   // 点赞
   router.post('/addDianzan', controller.forum.dianzan.addDianzan);
@@ -51,6 +53,8 @@ module.exports = app => {
   router.post('/getDianzanForum', controller.forum.dianzan.getDianzanForum);
   // 给我点赞的
   router.post('/getUserDianzanNum', controller.forum.dianzan.getUserDianzanNum);
+  // 更新点赞
+  router.post('/updateDianzanWarn', controller.forum.dianzan.updateDianzanWarn);
 
   // 评论
   router.post('/addComment', controller.forum.comment.addComment);
@@ -59,6 +63,8 @@ module.exports = app => {
   // 我的评论
   router.post('/getComment', controller.forum.comment.getComment);
   router.post('/getCommentForum', controller.forum.comment.getCommentForum);
+  // 更新评价
+  router.post('/updateUserForumComment', controller.forum.comment.updateUserForumComment);
 
   // 评论我的 getUserForumComment
   router.post('/getUserForumComment', controller.forum.comment.getUserForumComment);

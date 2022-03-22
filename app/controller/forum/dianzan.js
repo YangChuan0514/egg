@@ -1,6 +1,6 @@
-"use strict";
+'use strict';
 
-const Controller = require("egg").Controller;
+const Controller = require('egg').Controller;
 
 class dianzanController extends Controller {
   async addDianzan() {
@@ -36,10 +36,35 @@ class dianzanController extends Controller {
     const ctx = this.ctx;
     const data = ctx.request.body;
     const getData = await ctx.service.forum.index.getForumData(data);
-    const IdList = getData.map((item) => item.id);
+    const IdList = getData.map(item => item.id);
     const res = await ctx.service.forum.dianzan.getDianzanNum({
       dzForumId: IdList,
     });
+    ctx.body = res;
+  }
+
+  async updateDianzanWarn() {
+    const ctx = this.ctx;
+    const data = ctx.request.body;
+    const getData = await ctx.service.forum.index.getForumData(data);
+    const IdList = getData.map(item => item.id);
+    const res = await ctx.service.forum.dianzan.getDianzanNum({
+      dzForumId: IdList,
+    });
+    const promiseAll = [];
+    res.forEach(item => {
+      item.dataValues.warn = 1;
+      promiseAll.push(
+        new Promise(async res => {
+          res(
+            await ctx.service.forum.dianzan.updateDianzan(item.dataValues, {
+              dianzanId: item.dataValues.dianzanId,
+            })
+          );
+        })
+      );
+    });
+    await Promise.all(promiseAll);
     ctx.body = res;
   }
 }

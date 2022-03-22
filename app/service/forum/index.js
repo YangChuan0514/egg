@@ -68,6 +68,7 @@ class forumService extends Service {
   // 模糊搜索
   async getForumDataDim(obj) {
     const { ctx } = this;
+    console.log(obj);
     const res = await ctx.model.Forum.findAll({
       include: [
         { model: this.app.model.Collect },
@@ -82,8 +83,8 @@ class forumService extends Service {
         [ 'newTime', 'DESC' ],
         [ 'comments', 'newTime', 'DESC' ],
       ],
-      limit: obj.l, // 每页多少条
-      offset: obj.l * (obj.o - 1), // 跳过多少条
+      limit: Number(obj.l), // 每页多少条
+      offset: Number(obj.l * (obj.o - 1)), // 跳过多少条
       where: {
         $or: [
           { title: { $like: `%${obj.search || ''}%` } },

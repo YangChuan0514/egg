@@ -12,9 +12,9 @@ class CommentService extends Service {
       return null;
     }
   }
-  async updateCommentData(obj) {
+  async updateCommentData(newDate, obj) {
     const { ctx } = this;
-    const res = await ctx.model.Comment.update({ where: obj });
+    const res = await ctx.model.Comment.update(newDate, { where: obj });
     return res;
   }
   async deleteCommentData(obj) {

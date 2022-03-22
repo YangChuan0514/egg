@@ -57,5 +57,11 @@ class dianzanService extends Service {
     });
     return resArr;
   }
+  // 更新
+  async updateDianzan(newDate, obj) {
+    const { ctx } = this;
+    const res = await ctx.model.Dianzan.update(newDate, { where: obj });
+    return res;
+  }
 }
 module.exports = dianzanService;
