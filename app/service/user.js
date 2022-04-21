@@ -1,11 +1,11 @@
-"use strict";
-const Service = require("egg").Service;
+'use strict';
+const Service = require('egg').Service;
 // 用户
 class userService extends Service {
   async addUserData(obj) {
     try {
       const app = this.app;
-      const res = await app.mysql.insert("user", obj);
+      const res = await app.mysql.insert('user', obj);
       return res;
     } catch (error) {
       return null;
@@ -14,7 +14,7 @@ class userService extends Service {
   async updatedUserData(obj) {
     try {
       const app = this.app;
-      const res = await app.mysql.update("user", obj);
+      const res = await app.mysql.update('user', obj);
       return res;
     } catch (error) {
       return null;
@@ -23,7 +23,7 @@ class userService extends Service {
   async getUserData(obj) {
     try {
       const app = this.app;
-      const res = await app.mysql.get("user", obj);
+      const res = await app.mysql.get('user', obj);
       return res;
     } catch (error) {
       return null;

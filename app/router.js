@@ -63,6 +63,9 @@ module.exports = app => {
   // 我的评论
   router.post('/getComment', controller.forum.comment.getComment);
   router.post('/getCommentForum', controller.forum.comment.getCommentForum);
+  // 回复评论
+  router.post('/addCommentReply', controller.forum.commentReply.addCommentReply);
+  router.post('/deleteCommentReply', controller.forum.commentReply.deleteCommentReply);
   // 更新评价
   router.post('/updateUserForumComment', controller.forum.comment.updateUserForumComment);
 
@@ -86,4 +89,11 @@ module.exports = app => {
   // 关注我的
   router.post('/getUserAttentionTMessage', controller.userAttention.userAttentionTMessage);
   router.post('/updateUserAttWarn', controller.userAttention.updateUserAttWarn);
+
+  // 宠物秘籍
+  router.post('/catCheatDataFindAll', controller.homePage.catCheats.catCheatDataFindAll);
+  router.post('/catCheatDataFind', controller.homePage.catCheats.catCheatDataFind);
+  // 宠物百科
+  router.post('/catDataFindAll', controller.homePage.catData.catDataFindAll);
+  router.post('/catDataFind', controller.homePage.catData.catDataFind);
 };

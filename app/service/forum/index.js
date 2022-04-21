@@ -74,7 +74,9 @@ class forumService extends Service {
         { model: this.app.model.Collect },
         {
           model: this.app.model.Comment,
-          include: [{ model: this.app.model.UserMessage }],
+          include: [
+            { model: this.app.model.UserMessage },
+          ],
         },
         { model: this.app.model.Dianzan },
         { model: this.app.model.UserMessage },
@@ -111,9 +113,14 @@ class forumService extends Service {
         [ 'newTime', 'DESC' ],
         [ 'comments', 'newTime', 'DESC' ],
       ],
-      limit: obj.l, // 每页多少条
-      offset: obj.l * (obj.o - 1), // 跳过多少条
+      // limit: obj.l, // 每页多少条
+      // offset: obj.l * (obj.o - 1), // 跳过多少条
       where: { userId: obj.userId },
+    });
+    res.forEach(item => {
+      if (item.img) {
+        item.img = item.img.split(',');
+      }
     });
     return res;
   }
@@ -124,7 +131,12 @@ class forumService extends Service {
         { model: this.app.model.Collect },
         {
           model: this.app.model.Comment,
-          include: [{ model: this.app.model.UserMessage }],
+          include: [
+            { model: this.app.model.UserMessage },
+            {
+              model: this.app.model.CommentReply,
+            },
+          ],
         },
         { model: this.app.model.Dianzan },
         { model: this.app.model.UserMessage },

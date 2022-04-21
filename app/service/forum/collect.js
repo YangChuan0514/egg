@@ -1,5 +1,5 @@
-"use strict";
-const Service = require("egg").Service;
+'use strict';
+const Service = require('egg').Service;
 // 点赞
 class CollectService extends Service {
   async addCollectData(obj) {
@@ -28,6 +28,7 @@ class CollectService extends Service {
         {
           model: this.app.model.Forum,
           include: [
+            { model: this.app.model.Collect },
             {
               model: this.app.model.Comment,
               include: [{ model: this.app.model.UserMessage }],
@@ -44,7 +45,11 @@ class CollectService extends Service {
       if (item.forum) {
         resArr.push(item.forum);
       }
-
+    });
+    resArr.forEach(item => {
+      if (item.img) {
+        item.img = item.img.split(',');
+      }
     });
     return resArr;
   }

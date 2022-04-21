@@ -1,5 +1,5 @@
-"use strict";
-const Service = require("egg").Service;
+'use strict';
+const Service = require('egg').Service;
 // 点赞
 class UserMessageService extends Service {
   async addUserMessageData(obj) {

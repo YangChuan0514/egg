@@ -30,8 +30,34 @@ class forumController extends Controller {
     const ctx = this.ctx;
     const data = ctx.request.body;
     const getData = await ctx.service.forum.index.getUserForumDataId(data);
+    let commentUserId = [];
+    getData.forEach(item => {
+      item.comments.forEach(key => {
+        key.commentReplies.forEach(v => {
+          commentUserId.push(v.cruserId);
+          commentUserId.push(v.userId);
+        });
+      });
+    });
+    commentUserId = [ ...new Set(commentUserId) ];
+    const userMessageList = await ctx.service.userMessage.getUserMessageData({ userId: commentUserId });
+    userMessageList.forEach(user => {
+      getData.forEach(item => {
+        item.comments.forEach(key => {
+          key.commentReplies.forEach(v => {
+            if (v.userId === user.userId) {
+              v.dataValues.userIdMessage = user.dataValues;
+            }
+            if (v.cruserId === user.userId) {
+              v.dataValues.cruserIdMessage = user.dataValues;
+            }
+          });
+        });
+      });
+    });
     ctx.body = getData;
   }
+
   async getUserForum() {
     const ctx = this.ctx;
     const data = ctx.request.body;

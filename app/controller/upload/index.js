@@ -9,7 +9,7 @@ class upLoadController extends Controller {
     const secretKey = 'btdn9EwLJoDWoVYYUi5bAyNM810cOkMIXATJncME';
     const mac = new qiniu.auth.digest.Mac(accessKey, secretKey);
     const options = {
-      scope: 'vuebs',
+      scope: 'eggvue',
       expires: 7200,
       returnBody: '{"key":"$(key)","hash":"$(etag)","fsize":$(fsize),"bucket":"$(bucket)","name":"$(x:name)"}',
     };

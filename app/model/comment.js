@@ -14,6 +14,7 @@ module.exports = app => {
   });
   Comment.associate = function() {
     app.model.Comment.hasOne(app.model.UserMessage, { sourceKey: 'userId', foreignKey: 'userId' });
+    app.model.Comment.hasMany(app.model.CommentReply, { foreignKey: 'commentId' });
     app.model.Comment.hasOne(app.model.Forum, { sourceKey: 'commentForumId', foreignKey: 'id' });
   };
   return Comment;
